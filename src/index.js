@@ -4,6 +4,7 @@ const app = express()
 const cookieParser = require('cookie-parser')
 const passport = require('passport')
 const cors = require('cors')
+const pool = require('./db')
 
 //import passport middleware
 require('./middleware/passport-middleware')
@@ -11,7 +12,10 @@ require('./middleware/passport-middleware')
 //initialize middleware
 app.use(express.json())
 app.use(cookieParser())
-app.use(cors("*"))
+app.use(cors({
+    origin:'http://localhost:3000',
+    credentials: true,
+}));
 app.use(passport.initialize())
 
 //import router
